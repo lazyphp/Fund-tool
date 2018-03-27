@@ -3,7 +3,8 @@
 
 基金定投助手使用MIT开源协议发布，是一款基于Chrome开发的扩展程序。通过使用本扩展，可以帮助大家及时对持有的基金进行查询、补仓（定投）、卖出（盈利）。  
 
-##扩展下载与安装  
+## 扩展下载与安装
+
 谷歌网上应用店地址（推荐）：[通过官方渠道安装 ](https://chrome.google.com/webstore/detail/%E5%9F%BA%E9%87%91%E5%AE%9A%E6%8A%95%E5%8A%A9%E6%89%8B/bipnngiflpojfmfcpdngilmohjopbdhl?hl=zh-CN)
 
 GITHUB源码：[https://github.com/lazyphp/Fund-tool](https://github.com/lazyphp/Fund-tool) 
@@ -22,12 +23,14 @@ GITHUB源码：[https://github.com/lazyphp/Fund-tool](https://github.com/lazyphp
 -   4.打开开发者模式后，选择 加载已解压的扩展程序 选项。并在弹窗窗口中，找到并选择 基金定投助手 所在的目录。如下图  
 ![mahua](http://wx3.sinaimg.cn/mw690/d2d33fbfgy1fprf1km9ybj20u60butbd.jpg)    
 至此，我们已经成功安装了 基金定投助手 扩展，可以开始我们的理财之旅。最后，官方还是推荐大家通过 网上应用商店安装本扩展。通过开发者模式安装，可能会存在扩展突然无法使用的问题。  
-  
-##使用扩展
+
+## 使用扩展
+
 扩展安装完毕后，在浏览器菜单栏找到本扩展的图表，点击之。在弹出的对话框中，按照对应列标题填写自己持有的基金信息就可以了。  
 ![mahua](http://wx1.sinaimg.cn/mw690/d2d33fbfgy1fprf1l53pmj20jq0c7my8.jpg)  
-  
-##基金价格抓取与提醒  
+
+## 基金价格抓取与提醒
+
 本扩展会在每天早上8点到下午17点之间，实时抓取您所填写的基金信息。鼠标移动至对应的基金代码和最新价格，会显示该基金的中文名称和最后一次获取实时数据的时间。若您在扩展非运行抓取时间内，需要获取最新的数据。可以点击 扩展顶部的 刷新按钮。  
  
 提醒通知方面，本扩展目前设定为每天下午2点30分起，每隔10分钟提醒一次。主要提醒内容为：  

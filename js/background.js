@@ -59,7 +59,7 @@ var notifications = function(){
 }
 
 chrome.alarms.onAlarm.addListener(function(alarm) {
-    refreshFund()
+    refreshFund(false)
     notifications();
 });
 //創造定時器

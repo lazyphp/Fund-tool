@@ -145,7 +145,8 @@ $(function() {
 			title:'刷新中...',
 			id: 'refresh_fund'
 		}).showModal()
-        refreshFund();
+
+        refreshFund(true);
         setTimeout(function () {
             _list();
             d.close().remove();

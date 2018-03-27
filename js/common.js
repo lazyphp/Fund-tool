@@ -42,10 +42,10 @@ var _alert = function (msg) {
 /**
  * 实时更新基金
  */
-var refreshFund = function () {
+var refreshFund = function (user) {
     var time = moment().format('H');
 
-    if(parseInt(time) < 8 || parseInt(time) > 17 ){
+    if( (parseInt(time) < 8 || parseInt(time) > 17) && user == false ){
         return false;
     }
 
