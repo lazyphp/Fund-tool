@@ -16,17 +16,20 @@ var _list = function(){
 					light = 'am-success';
 				}
 
+				var income = isBlank(json_str.now) ? 0 : parseFloat(json_str.now * 1000) - parseFloat(json_str.buy * 1000);
+
 				var append_str = '' +
 					'<tr class="fund_list '+json_str.code+' '+light+' ">' +
 						'<td class="am-text-middle" title="'+json_str.name+'">'+json_str.code+'</td>' +
-						'<td class="am-text-middle"><input type="text" class="am-text-center" value="'+json_str.buy+'" size="5" placeholder-text="购入价格"  name="buy" /></td>' +
+						'<td class="am-text-middle"><input type="text" class="am-text-center input-size" value="'+json_str.buy+'"  placeholder-text="购入价格"  name="buy" /></td>' +
 						'<td class="am-text-middle">' +
-							'<input type="text" class="am-text-center" value="'+json_str.adding+'" size="5" placeholder-text="补仓价格提醒" name="adding" />' +
+							'<input type="text" class="am-text-center input-size" value="'+json_str.adding+'"  placeholder-text="补仓价格提醒" name="adding" />' +
 						'</td>' +
 						'<td class="am-text-middle">' +
-							'<input type="text" class="am-text-center" value="'+json_str.sell+'" size="5" placeholder-text="卖出价格提醒" name="sell" />' +
+							'<input type="text" class="am-text-center input-size" value="'+json_str.sell+'"  placeholder-text="卖出价格提醒" name="sell" />' +
 						'</td>' +
 						'<td class="am-text-middle" title="最后更新时间: '+json_str.gztime+'">'+json_str.now+'</td>' +
+						'<td class="am-text-middle" title="每一千元的盈亏计算">'+income.toFixed(2)+'</td>' +
 						'<td class="am-text-middle">' +
 							'<span class="am-btn am-btn-xs am-btn-primary" data="'+json_str.code+'">修改</span>' +
 							'<span class="am-btn am-btn-xs am-btn-danger" data="'+json_str.code+'">删除</span>' +
@@ -40,11 +43,8 @@ var _list = function(){
 
 $(function() {
 
-	// 加载设置
-	var defaultConfig = {color: 'white'}; // 默认配置
-	chrome.storage.sync.get(defaultConfig, function(items) {
-		document.body.style.backgroundColor = items.color;
-	});
+	//清空图表下方的数字提醒
+    chrome.browserAction.setBadgeText({text: ""});
 
 	//新增基金
 	$('#add .am-btn-success').on('click', function(){
@@ -105,6 +105,9 @@ $(function() {
         localStorage.setItem(code, JSON.stringify(fund));
         _alert('修改 '+code+' 基金成功');
         inputDom.addClass('am-text-primary')
+		setTimeout(function () {
+			_list();
+        }, 2500)
     })
 
 	//删除基金
@@ -122,6 +125,9 @@ $(function() {
         chrome.tabs.create({url: 'https://www.pescms.com/d/index/32.html'});
     })
 
+    /**
+	 * 赞赏弹窗
+     */
     $('.zan').on('click', function(){
         var d = dialog({
             title: '打赏给本扩展',
@@ -131,6 +137,9 @@ $(function() {
         d.showModal();
     })
 
+    /**
+	 * 刷新列表和获取最新价格
+     */
 	$('.refresh').on('click', function(){
 		var d = dialog({
 			title:'刷新中...',

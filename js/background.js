@@ -12,6 +12,8 @@ var notifications = function(){
     }
     var getNoticeLocalStorage = JSON.parse(localStorage.getItem('saveNotice'));
 
+    var BadgeNumber = 0;
+
     for(var i in localStorage) {
         if (isNumeric(i)) {
             var content = localStorage.getItem(i);
@@ -32,6 +34,8 @@ var notifications = function(){
                     msg += ' 基金跌幅已达到补仓价格，请及时处理';
                     icon = 'adding.png';
                     saveNotice[i] = getNoticeLocalStorage == null || !getNoticeLocalStorage[date][i] ? 11 : getNoticeLocalStorage[date][i] + 1;
+                }else{
+                    continue;
                 }
 
                 if(getNoticeLocalStorage == null || getNoticeLocalStorage[date][i] % 10 == 0){
@@ -41,9 +45,15 @@ var notifications = function(){
                         title: '基金定投提醒',
                         message: msg
                     });
+                    BadgeNumber++;
                 }
             }
         }
+    }
+
+    //添加通知图标数字提醒
+    if(BadgeNumber > 0){
+        chrome.browserAction.setBadgeText({text: String(BadgeNumber)});
     }
     localStorage.setItem("saveNotice", JSON.stringify({[date] : saveNotice}));
 }
