@@ -56,21 +56,23 @@ $(function() {
 		}
 		for(var i in input_content){
 			var value = input_content[i]['value'];
+
 			var msg = $('input[name='+input_content[i]['name']+']').attr('placeholder-text');
-			if(value == ''){
-				alert('请输入'+msg);
+			if(isBlank(value)){
+				_alert('请输入'+msg);
 				return false;
 			}
 
 			if(isNumeric(value) == false){
-				alert(msg+'仅限输入数字');
+				_alert(msg+'仅限输入数字');
                 return false;
 			}
 			item[input_content[i]['name']] = input_content[i]['value']
 		}
+
         localStorage.setItem(input_content[0]['value'], JSON.stringify(item));
-        $('#add input').val("");
-        alert('新增基金成功');
+        $('#add input').val('');
+        _alert('新增基金成功');
         _list();
 
 	});
@@ -88,20 +90,20 @@ $(function() {
         for(var i in input_content){
             var value = input_content[i]['value'];
             var msg = $('input[name='+input_content[i]['name']+']').attr('placeholder-text');
-            if(value == ''){
-                alert('请输入'+msg);
+            if(isBlank(value)){
+            	_alert('请输入'+msg);
                 return false;
             }
 
             if(isNumeric(value) == false){
-                alert(msg+'仅限输入数字');
+                _alert(msg+'仅限输入数字');
                 return false;
             }
             fund[input_content[i]['name']] = input_content[i]['value']
         }
 
         localStorage.setItem(code, JSON.stringify(fund));
-        alert('修改基金成功');
+        _alert('修改 '+code+' 基金成功');
         inputDom.addClass('am-text-primary')
     })
 
@@ -128,6 +130,19 @@ $(function() {
         })
         d.showModal();
     })
+
+	$('.refresh').on('click', function(){
+		var d = dialog({
+			title:'刷新中...',
+			id: 'refresh_fund'
+		}).showModal()
+        refreshFund();
+        setTimeout(function () {
+            _list();
+            d.close().remove();
+        }, 2000)
+
+	})
 
 	_list();
 
