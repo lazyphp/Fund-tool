@@ -12,7 +12,7 @@
 	<script type="text/javascript" src="js/popup.js"></script>
 	<style>
 		body {
-			width: 700px;
+			min-width: 700px;
 			min-height: 400px;
 		}
 		.am-link-cursor{
@@ -40,12 +40,14 @@
 				<span class="am-link-cursor refresh am-text-secondary am-margin-right-xs"><i class="am-icon-refresh"></i> 刷新</span>
 				<span class="am-link-cursor document am-margin-right-xs"><i class="am-icon-book"></i> 帮助文档</span>
 				<span class="am-link-cursor zan am-text-danger am-margin-right-xs"><i class="am-icon-plug"></i> 捐赠支持</span>
+				<span class="am-link-cursor popup am-margin-right-xs"><i class="am-icon-arrows-alt"></i> 全屏</span>
 			</small>
 		</div>
 	</div>
 	<hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
 	<table class="am-table am-table-bordered am-table-striped am-table-hover am-text-sm am-text-center">
 		<tr>
+			<th class="am-text-center am-show-lg-only">基金名称</th>
 			<th class="am-text-center">基金代码</th>
 			<th class="am-text-center">购入价格</th>
 			<th class="am-text-center">补仓价格提醒</th>
@@ -55,6 +57,7 @@
 			<th class="am-text-center">操作</th>
 		</tr>
 		<tr id="add">
+			<td class="am-text-middle am-show-lg-only"></td>
 			<td class="am-text-middle">
 				<input type="text" class="am-text-center input-size" value=""  placeholder-text="基金代码" name="code" />
 			</td>

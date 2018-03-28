@@ -20,6 +20,7 @@ var _list = function(){
 
 				var append_str = '' +
 					'<tr class="fund_list '+json_str.code+' '+light+' ">' +
+						'<td class="am-text-middle am-show-lg-only">'+json_str.name+'</td>' +
 						'<td class="am-text-middle" title="'+json_str.name+'">'+json_str.code+'</td>' +
 						'<td class="am-text-middle"><input type="text" class="am-text-center input-size" value="'+json_str.buy+'"  placeholder-text="购入价格"  name="buy" /></td>' +
 						'<td class="am-text-middle">' +
@@ -152,6 +153,13 @@ $(function() {
             d.close().remove();
         }, 2000)
 
+	})
+
+    /**
+	 * 全屏按钮
+     */
+    $('.popup').on('click', function(){
+        chrome.tabs.create({url: 'popup.html'});
 	})
 
 	_list();
