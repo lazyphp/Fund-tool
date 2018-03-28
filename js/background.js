@@ -28,17 +28,17 @@ var notifications = function(){
                 if (parseFloat(json_str.now) >= parseFloat(json_str.sell)) {
                     msg += ' 基金涨幅已达到可卖出价格，请及时处理';
                     icon = 'sell.png';
-                    saveNotice[i] = getNoticeLocalStorage == null || !getNoticeLocalStorage[date][i] ? 11 : getNoticeLocalStorage[date][i] + 1;
+                    saveNotice[i] = getNoticeLocalStorage == null || !getNoticeLocalStorage[date] || !getNoticeLocalStorage[date][i] ? 11 : getNoticeLocalStorage[date][i] + 1;
 
                 } else if (parseFloat(json_str.adding) >= parseFloat(json_str.now)) {
                     msg += ' 基金跌幅已达到补仓价格，请及时处理';
                     icon = 'adding.png';
-                    saveNotice[i] = getNoticeLocalStorage == null || !getNoticeLocalStorage[date][i] ? 11 : getNoticeLocalStorage[date][i] + 1;
+                    saveNotice[i] = getNoticeLocalStorage == null || !getNoticeLocalStorage[date] || !getNoticeLocalStorage[date][i] ? 11 : getNoticeLocalStorage[date][i] + 1;
                 }else{
                     continue;
                 }
 
-                if(getNoticeLocalStorage == null || getNoticeLocalStorage[date][i] % 10 == 0){
+                if(getNoticeLocalStorage == null || !getNoticeLocalStorage[date] || getNoticeLocalStorage[date][i] % 10 == 0){
                     chrome.notifications.create(null, {
                         type: 'basic',
                         iconUrl: 'img/'+icon,

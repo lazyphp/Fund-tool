@@ -27,7 +27,7 @@ GITHUB源码：[https://github.com/lazyphp/Fund-tool](https://github.com/lazyphp
 ## 使用扩展
 
 扩展安装完毕后，在浏览器菜单栏找到本扩展的图表，点击之。在弹出的对话框中，按照对应列标题填写自己持有的基金信息就可以了。  
-![mahua](http://wx1.sinaimg.cn/mw690/d2d33fbfgy1fprf1l53pmj20jq0c7my8.jpg)  
+![mahua](http://wx1.sinaimg.cn/mw690/d2d33fbfgy1fpsj7o4f2dj20nz0e9abj.jpg)  
 
 ## 基金价格抓取与提醒
 
@@ -40,3 +40,9 @@ GITHUB源码：[https://github.com/lazyphp/Fund-tool](https://github.com/lazyphp
 -   实时价格 少于等于 预设的补仓价格。  
 
 除了提醒方面，每次查看列表时，当实时价格符合 （大于等于）卖出价格 或者 （少于等于）补仓价格 。会依次对该行基金 标记为：红色 和 绿色。  
+
+## TODO
+
+- [ ] 数据备份功能，防止扩展崩溃数据全丢。  
+- [ ] 提高扩展稳定性，目前已知定时通知有一定几率导致扩展崩溃。  
+- [ ] 自定义设置通知时间。目前为2点30分起，每隔10分钟提醒一次。  
