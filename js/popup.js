@@ -162,6 +162,13 @@ $(function() {
         chrome.tabs.create({url: 'popup.html'});
 	})
 
+    /**
+	 * 数据来源
+     */
+    $('.fund-source').on('click', function(){
+        chrome.tabs.create({url: 'http://fund.eastmoney.com/'});
+	})
+
 	_list();
 
 
