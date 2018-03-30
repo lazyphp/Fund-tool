@@ -12,7 +12,7 @@
 	<script type="text/javascript" src="js/popup.js"></script>
 	<style>
 		body {
-			min-width: 700px;
+			min-width: 65rem;
 			min-height: 400px;
 		}
 		.am-link-cursor{
@@ -42,7 +42,7 @@
 					<span class="am-link-cursor refresh am-text-secondary am-margin-right-xs"><i class="am-icon-refresh"></i> 刷新</span>
 					<span class="am-link-cursor document am-margin-right-xs"><i class="am-icon-book"></i> 帮助文档</span>
 					<span class="am-link-cursor zan am-text-danger am-margin-right-xs"><i class="am-icon-plug"></i> 捐赠支持</span>
-					<span class="am-link-cursor popup am-margin-right-xs"><i class="am-icon-arrows-alt"></i> 全屏</span>
+					<span class="am-link-cursor popup am-margin-right-xs"><i class="am-icon-arrows-alt"></i> 详细列表</span>
 				</small>
 			</div>
 			<div class="am-u-sm-4 am-text-right">
@@ -59,11 +59,12 @@
 		<tr>
 			<th class="am-text-center am-show-lg-only">基金名称</th>
 			<th class="am-text-center">基金代码</th>
-			<th class="am-text-center">购入价格</th>
+			<th class="am-text-center">成本价</th>
 			<th class="am-text-center">补仓价格提醒</th>
 			<th class="am-text-center">卖出价格提醒</th>
+			<th class="am-text-center">持有份额</th>
 			<th class="am-text-center">最新价格</th>
-			<th class="am-text-center">每千元盈亏</th>
+			<th class="am-text-center">盈亏估算</th>
 			<th class="am-text-center">操作</th>
 		</tr>
 		<tr id="add">
@@ -80,11 +81,24 @@
 			<td class="am-text-middle">
 				<input type="text" class="am-text-center input-size" value=""  placeholder-text="卖出价格提醒" name="sell" />
 			</td>
+			<td class="am-text-middle">
+				<input type="text" class="am-text-center input-size" value="" placeholder-text="持有份额"  name="fene" />
+			</td>
 			<td class="am-text-middle">-</td>
 			<td class="am-text-middle">-</td>
 			<td class="am-text-middle"><span class="am-btn am-btn-xs am-btn-success">新增</span></td>
 		</tr>
+		<tr>
+			<td class="am-show-lg-only"></td>
+			<td colspan="5"></td>
+			<td>合计</td>
+			<td class="total"></td>
+			<td></td>
+		</tr>
 	</table>
+</div>
+<div class="help_content am-padding-xs" style="display: none">
+	<p>若您是初次使用本扩展，对功能不熟悉的话，请点击《帮助文档》，该文档将会详细介绍本扩展使用的方法。</p>
 </div>
 </body>
 </html>

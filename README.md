@@ -27,7 +27,8 @@ GITHUB源码：[https://github.com/lazyphp/Fund-tool](https://github.com/lazyphp
 ## 使用扩展
 
 扩展安装完毕后，在浏览器菜单栏找到本扩展的图表，点击之。在弹出的对话框中，按照对应列标题填写自己持有的基金信息就可以了。  
-![mahua](http://wx1.sinaimg.cn/mw690/d2d33fbfgy1fpsj7o4f2dj20nz0e9abj.jpg)  
+![mahua](http://wx1.sinaimg.cn/large/d2d33fbfgy1fpuy8j7655j20zk0m8wfs.jpg)  
+![mahua](http://wx2.sinaimg.cn/large/d2d33fbfgy1fpuy8jmex9j20xc0m80ub.jpg)  
 
 ## 基金价格抓取与提醒
 

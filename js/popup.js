@@ -2,6 +2,7 @@
 
 var _list = function(){
 	$('.fund_list').remove();
+    var total = 0;
 	for(var i in localStorage){
 		if(isNumeric(i)){
 			var content = localStorage.getItem(i);
@@ -16,7 +17,13 @@ var _list = function(){
 					light = 'am-success';
 				}
 
-				var income = isBlank(json_str.now) ? 0 : parseFloat(json_str.now * 1000) - parseFloat(json_str.buy * 1000);
+				//由于新版没有这个变量，需要手动判断是否为空
+				var fene = isBlank(json_str.fene) ? '' : parseFloat(json_str.fene);
+				//盈亏 = 持有份额 * 最新价格 - 持有金额
+				var yingkui = fene == '' || isBlank(json_str.now) ? '-' : (fene * parseFloat(json_str.now) - json_str.buy * fene).toFixed(2) ;
+				if(isNumeric(yingkui)){
+				    total += parseFloat(yingkui);
+                }
 
 				var append_str = '' +
 					'<tr class="fund_list '+json_str.code+' '+light+' ">' +
@@ -29,8 +36,11 @@ var _list = function(){
 						'<td class="am-text-middle">' +
 							'<input type="text" class="am-text-center input-size" value="'+json_str.sell+'"  placeholder-text="卖出价格提醒" name="sell" />' +
 						'</td>' +
+                    '<td class="am-text-middle">' +
+                    '<input type="text" class="am-text-center input-size" value="'+fene+'" placeholder-text="持有份额" name="fene" />' +
+                    '</td>' +
 						'<td class="am-text-middle" title="最后更新时间: '+json_str.gztime+'">'+json_str.now+'</td>' +
-						'<td class="am-text-middle" title="每一千元的盈亏计算">'+income.toFixed(2)+'</td>' +
+						'<td class="am-text-middle">'+yingkui+'</td>' +
 						'<td class="am-text-middle">' +
 							'<span class="am-btn am-btn-xs am-btn-primary" data="'+json_str.code+'">修改</span>' +
 							'<span class="am-btn am-btn-xs am-btn-danger" data="'+json_str.code+'">删除</span>' +
@@ -40,6 +50,9 @@ var _list = function(){
 			}
 		}
 	}
+
+	$('.total').html(total.toFixed(2))
+
 }
 
 $(function() {
@@ -53,12 +66,14 @@ $(function() {
 		var item = {
 			now : '',
             gztime : '',
+            fene : '',
             name:''
 		}
 		for(var i in input_content){
 			var value = input_content[i]['value'];
 
 			var msg = $('input[name='+input_content[i]['name']+']').attr('placeholder-text');
+
 			if(isBlank(value)){
 				_alert('请输入'+msg);
 				return false;
@@ -92,6 +107,7 @@ $(function() {
             var value = input_content[i]['value'];
             var msg = $('input[name='+input_content[i]['name']+']').attr('placeholder-text');
             if(isBlank(value)){
+
             	_alert('请输入'+msg);
                 return false;
             }
@@ -170,6 +186,24 @@ $(function() {
 	})
 
 	_list();
+
+    //引导页
+    if(!localStorage.getItem('help_dialog')){
+        var help_dialog = dialog({
+            title: '欢迎使用基金定投助手',
+            align: 'bottom left',
+            width : '350px',
+            content: $('.help_content'),
+            padding:0,
+            cancelDisplay: false,
+            cancel: function () {
+                localStorage.setItem('help_dialog', 1)
+            }
+
+        })
+        help_dialog.show($('.document')[0])
+    }
+
 
 
 });
