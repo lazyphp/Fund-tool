@@ -86,3 +86,54 @@ var refreshFund = function (user) {
         }
     }
 }
+
+/**
+ * 更新单位净值
+ * @param user
+ * @returns {boolean}
+ */
+var refreshJingzhi = function (user) {
+    var time = moment().format('H');
+
+    if( (parseInt(time) > 9 && parseInt(time) < 19) && user == false ){
+        return false;
+    }
+
+    var xhr = [];
+    for(var key in localStorage) {
+        if (isNumeric(key)) {
+            (function(key){
+                xhr[key] = new XMLHttpRequest();
+                xhr[key].open("GET", 'http://fund.eastmoney.com/f10/F10DataApi.aspx?type=lsjz&code='+key+'&page=1&per=1&sdate=&edate=&rt='+Date.parse(new Date()), true);
+                xhr[key].onreadystatechange = function() {
+                    if (xhr[key].readyState == 4) {
+                        var result = xhr[key].responseText;
+                        if(result){
+                            //将JSONP格式手动解析为JSON字符串
+
+                            try{
+
+                                var result_match = result.match(/<tbody.*>.*?<\/tbody>/);
+                                if(result_match){
+                                    var jingzhi = $(result_match[0]).find('.tor.bold').html();
+                                    var jingzhi_time = $(result_match[0]).find('td').html();
+                                    var record = JSON.parse(localStorage.getItem(key))
+                                    if(!isBlank(jingzhi) && !isBlank(jingzhi_time) && !isBlank(record) ){
+                                        record['jingzhi'] = jingzhi;
+                                        record['jingzhi_time'] = jingzhi_time;
+                                        localStorage.setItem(key, JSON.stringify(record));
+                                    }
+                                }
+                            }catch (err){
+                                console.log('获取'+key+' 基金单位净值失败');
+                            }
+                        }
+                    }
+
+                }
+                xhr[key].send();
+            })(key)
+
+        }
+    }
+}

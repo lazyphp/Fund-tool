@@ -43,6 +43,7 @@
 					<span class="am-link-cursor document am-margin-right-xs"><i class="am-icon-book"></i> 帮助文档</span>
 					<span class="am-link-cursor zan am-text-danger am-margin-right-xs"><i class="am-icon-plug"></i> 捐赠支持</span>
 					<span class="am-link-cursor popup am-margin-right-xs"><i class="am-icon-arrows-alt"></i> 详细列表</span>
+					<span class="am-link-cursor bak am-margin-right-xs"><i class="am-icon-save"></i> 备份还原</span>
 				</small>
 			</div>
 			<div class="am-u-sm-4 am-text-right">
@@ -65,6 +66,8 @@
 			<th class="am-text-center">持有份额</th>
 			<th class="am-text-center">最新价格</th>
 			<th class="am-text-center">盈亏估算</th>
+			<th class="am-text-center am-show-lg-only">单位净值</th>
+			<th class="am-text-center am-show-lg-only">持有收益</th>
 			<th class="am-text-center">操作</th>
 		</tr>
 		<tr id="add">
@@ -86,19 +89,24 @@
 			</td>
 			<td class="am-text-middle">-</td>
 			<td class="am-text-middle">-</td>
+			<td class="am-text-middle am-show-lg-only">-</td>
+			<td class="am-text-middle am-show-lg-only">-</td>
 			<td class="am-text-middle"><span class="am-btn am-btn-xs am-btn-success">新增</span></td>
 		</tr>
 		<tr>
 			<td class="am-show-lg-only"></td>
 			<td colspan="5"></td>
-			<td>合计</td>
+			<td>估算合计</td>
 			<td class="total"></td>
+			<td class="am-show-lg-only">持有合计</td>
+			<td class="am-show-lg-only total_jingzhi">-</td>
 			<td></td>
 		</tr>
 	</table>
 </div>
 <div class="help_content am-padding-xs" style="display: none">
 	<p>若您是初次使用本扩展，对功能不熟悉的话，请点击《帮助文档》，该文档将会详细介绍本扩展使用的方法。</p>
+	<p>点击 X 按钮，引导功能将不再显示</p>
 </div>
 </body>
 </html>

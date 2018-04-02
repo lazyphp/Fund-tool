@@ -60,6 +60,7 @@ var notifications = function(){
 
 chrome.alarms.onAlarm.addListener(function(alarm) {
     refreshFund(false)
+    refreshJingzhi(false)
     notifications();
 });
 //創造定時器

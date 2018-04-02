@@ -3,6 +3,7 @@
 var _list = function(){
 	$('.fund_list').remove();
     var total = 0;
+    var total_jingzhi = 0;
 	for(var i in localStorage){
 		if(isNumeric(i)){
 			var content = localStorage.getItem(i);
@@ -19,11 +20,20 @@ var _list = function(){
 
 				//由于新版没有这个变量，需要手动判断是否为空
 				var fene = isBlank(json_str.fene) ? '' : parseFloat(json_str.fene);
-				//盈亏 = 持有份额 * 最新价格 - 持有金额
+				var jingzhi = isBlank(json_str.jingzhi) ? '' : parseFloat(json_str.jingzhi);
+				var jingzhi_time = isBlank(json_str.jingzhi_time) ? '' : json_str.jingzhi_time;
+				//盈亏估算 = 持有份额 * 最新价格 - 成本价 * 持有份额
 				var yingkui = fene == '' || isBlank(json_str.now) ? '-' : (fene * parseFloat(json_str.now) - json_str.buy * fene).toFixed(2) ;
-				if(isNumeric(yingkui)){
-				    total += parseFloat(yingkui);
+                if(isNumeric(yingkui)){
+                    total += parseFloat(yingkui);
                 }
+
+                //持有收益 = 持有份额 * 单位净值 - 成本价 * 持有份额
+				var yingkui_jingzhi = fene == '' || jingzhi == '' ? '-' : (fene * parseFloat(jingzhi) - json_str.buy * fene).toFixed(2) ;
+                if(isNumeric(yingkui_jingzhi)){
+                    total_jingzhi += parseFloat(yingkui_jingzhi);
+                }
+
 
 				var append_str = '' +
 					'<tr class="fund_list '+json_str.code+' '+light+' ">' +
@@ -41,6 +51,8 @@ var _list = function(){
                     '</td>' +
 						'<td class="am-text-middle" title="最后更新时间: '+json_str.gztime+'">'+json_str.now+'</td>' +
 						'<td class="am-text-middle">'+yingkui+'</td>' +
+						'<td class="am-text-middle am-show-lg-only">'+jingzhi+'<span class="am-text-xs am-block">( '+jingzhi_time+' )</span></td>' +
+						'<td class="am-text-middle am-show-lg-only">'+yingkui_jingzhi+'</td>' +
 						'<td class="am-text-middle">' +
 							'<span class="am-btn am-btn-xs am-btn-primary" data="'+json_str.code+'">修改</span>' +
 							'<span class="am-btn am-btn-xs am-btn-danger" data="'+json_str.code+'">删除</span>' +
@@ -52,11 +64,11 @@ var _list = function(){
 	}
 
 	$('.total').html(total.toFixed(2))
+	$('.total_jingzhi').html(total_jingzhi.toFixed(2))
 
 }
 
 $(function() {
-
 	//清空图表下方的数字提醒
     chrome.browserAction.setBadgeText({text: ""});
 
@@ -139,7 +151,7 @@ $(function() {
 
     //帮助文档
     $('.document').on('click', function(){
-        chrome.tabs.create({url: 'https://www.pescms.com/d/index/32.html'});
+        chrome.tabs.create({url: 'https://www.pescms.com/d/v/32/84.html'});
     })
 
     /**
@@ -164,6 +176,7 @@ $(function() {
 		}).showModal()
 
         refreshFund(true);
+        refreshJingzhi(true)
         setTimeout(function () {
             _list();
             d.close().remove();
@@ -184,11 +197,36 @@ $(function() {
     $('.fund-source').on('click', function(){
         chrome.tabs.create({url: 'http://fund.eastmoney.com/'});
 	})
+    /**
+	 * 备份
+     */
+    $('.bak').on('click', function(){
+        chrome.tabs.create({url: 'bak.html'});
+	})
 
 	_list();
 
     //引导页
     if(!localStorage.getItem('help_dialog')){
+
+        var help_dialog_2 = dialog({
+            align: 'right',
+            content: '列表可以看到详尽的内容',
+            zIndex : 1
+        })
+        help_dialog_2.show($('.popup')[0])
+
+        var help_dialog_zan = dialog({
+            align: 'bottom',
+            content: '若觉得本扩展有用，捐赠可以使它持续更新',
+            zIndex : 1
+        })
+
+        setTimeout(function () {
+            help_dialog_2.close().remove();
+            help_dialog_zan.show($('.zan ')[0])
+        }, 5010)
+
         var help_dialog = dialog({
             title: '欢迎使用基金定投助手',
             align: 'bottom left',
@@ -199,9 +237,13 @@ $(function() {
             cancel: function () {
                 localStorage.setItem('help_dialog', 1)
             }
-
         })
-        help_dialog.show($('.document')[0])
+        setTimeout(function () {
+            help_dialog_zan.close().remove();
+            help_dialog.show($('.document')[0])
+        }, 10010)
+
+
     }
 
 
