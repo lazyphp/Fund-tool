@@ -21,7 +21,7 @@ var _list = function(){
 				//由于新版没有这个变量，需要手动判断是否为空
 				var fene = isBlank(json_str.fene) ? '' : parseFloat(json_str.fene);
 				var jingzhi = isBlank(json_str.jingzhi) ? '' : parseFloat(json_str.jingzhi);
-				var jingzhi_time = isBlank(json_str.jingzhi_time) ? '' : json_str.jingzhi_time;
+				var jingzhi_time = isBlank(json_str.jingzhi_time) ? '' : '( '+json_str.jingzhi_time+' )';
 				//盈亏估算 = 持有份额 * 最新价格 - 成本价 * 持有份额
 				var yingkui = fene == '' || isBlank(json_str.now) ? '-' : (fene * parseFloat(json_str.now) - json_str.buy * fene).toFixed(2) ;
                 if(isNumeric(yingkui)){
@@ -51,7 +51,7 @@ var _list = function(){
                     '</td>' +
 						'<td class="am-text-middle" title="最后更新时间: '+json_str.gztime+'">'+json_str.now+'</td>' +
 						'<td class="am-text-middle">'+yingkui+'</td>' +
-						'<td class="am-text-middle am-show-lg-only">'+jingzhi+'<span class="am-text-xs am-block">( '+jingzhi_time+' )</span></td>' +
+						'<td class="am-text-middle am-show-lg-only">'+jingzhi+'<span class="am-text-xs am-block">'+jingzhi_time+'</span></td>' +
 						'<td class="am-text-middle am-show-lg-only">'+yingkui_jingzhi+'</td>' +
 						'<td class="am-text-middle">' +
 							'<span class="am-btn am-btn-xs am-btn-primary" data="'+json_str.code+'">修改</span>' +

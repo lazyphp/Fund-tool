@@ -11,18 +11,18 @@ GITHUB源码：[https://github.com/lazyphp/Fund-tool](https://github.com/lazyphp
 
 网盘下载：[https://pan.baidu.com/s/1Z0zwbC4sdgm36KtFQQ31xg](https://pan.baidu.com/s/1Z0zwbC4sdgm36KtFQQ31xg) 
 
-若您会科学的方式访问到谷歌网上应用店，那么我们强烈推荐您通过官方的渠道进行安装。若您无法通过官方渠道安装，那么烦请您将本源码下载，并解压至硬盘任意路径。具体流程如下：  
+若您会科学的方式访问到谷歌网上应用店，那么我们强烈推荐您通过官方的渠道进行安装。若您无法通过官方渠道安装，那么烦请您到网盘下载Fund-tool.crx文件，并存放至硬盘任意路径。具体流程如下：  
   
   
--   1.将下载到的源码解压至任何目录。  
-![mahua](http://wx3.sinaimg.cn/mw690/d2d33fbfgy1fprf1j6k06j20r70gxjtd.jpg)    
--   2.打开Chrome浏览器（谷歌浏览器）。依次如下图方式，找到浏览器的扩展菜单。当前截图的浏览器版本为：版本 65.0.3325.181（正式版本） （64 位）  
+-   1.打开下载Fund-tool.crx所在的目录。  
+![mahua](http://wx2.sinaimg.cn/large/d2d33fbfgy1fpyd3vt12yj20b20733yo.jpg)    
+-   2.依次如下图方式，找到浏览器的扩展菜单。当前截图的浏览器版本为：版本 65.0.3325.181（正式版本） （64 位）  
 ![mahua](http://wx4.sinaimg.cn/mw690/d2d33fbfgy1fprf1jsxsoj20gd0e20uc.jpg)    
--   3.打开扩展程序 菜单页面后，在当前页面找到 开发者模式，并勾选。如下图：  
-![mahua](http://wx4.sinaimg.cn/mw690/d2d33fbfgy1fprf1k9o86j20pl0a2tad.jpg)    
--   4.打开开发者模式后，选择 加载已解压的扩展程序 选项。并在弹窗窗口中，找到并选择 基金定投助手 所在的目录。如下图  
-![mahua](http://wx3.sinaimg.cn/mw690/d2d33fbfgy1fprf1km9ybj20u60butbd.jpg)    
-至此，我们已经成功安装了 基金定投助手 扩展，可以开始我们的理财之旅。最后，官方还是推荐大家通过 网上应用商店安装本扩展。通过开发者模式安装，可能会存在扩展突然无法使用的问题。  
+-   3.将扩展Fund-tool.crx文件拖动到浏览器。如下图：  
+![mahua](http://wx2.sinaimg.cn/large/d2d33fbfgy1fpyd3w7dx8j21400lt0uq.jpg)    
+-   4.在弹出的对话框中，选择 添加扩展程序。如下图  
+![mahua](http://wx2.sinaimg.cn/mw690/d2d33fbfgy1fpyd3wli4nj20bc05tjrh.jpg)    
+至此，我们已经成功安装了 基金定投助手 扩展，可以开始我们的理财之旅。 
 
 ## 使用扩展
 
@@ -44,6 +44,4 @@ GITHUB源码：[https://github.com/lazyphp/Fund-tool](https://github.com/lazyphp
 
 ## TODO
 
-- [ ] 数据备份功能，防止扩展崩溃数据全丢。  
-- [ ] 提高扩展稳定性，目前已知定时通知有一定几率导致扩展崩溃。  
 - [ ] 自定义设置通知时间。目前为2点30分起，每隔10分钟提醒一次。  
