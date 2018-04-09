@@ -23,14 +23,15 @@ var notifications = function(){
                 var msg = json_str.name + ' '+i;
                 var icon = '';
 
+                var notice = isBlank(json_str.notice) ? '' : parseInt(json_str.notice);
 
 
-                if (parseFloat(json_str.now) >= parseFloat(json_str.sell)) {
+                if (parseFloat(json_str.now) >= parseFloat(json_str.sell) && notice != 2 && notice != 4 ) {
                     msg += ' 基金涨幅已达到可卖出价格，请及时处理';
                     icon = 'sell.png';
                     saveNotice[i] = getNoticeLocalStorage == null || !getNoticeLocalStorage[date] || !getNoticeLocalStorage[date][i] ? 11 : getNoticeLocalStorage[date][i] + 1;
 
-                } else if (parseFloat(json_str.adding) >= parseFloat(json_str.now)) {
+                } else if (parseFloat(json_str.adding) >= parseFloat(json_str.now) && notice != 2 && notice != 6 ) {
                     msg += ' 基金跌幅已达到补仓价格，请及时处理';
                     icon = 'adding.png';
                     saveNotice[i] = getNoticeLocalStorage == null || !getNoticeLocalStorage[date] || !getNoticeLocalStorage[date][i] ? 11 : getNoticeLocalStorage[date][i] + 1;

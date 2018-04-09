@@ -34,14 +34,33 @@ var _list = function(){
                     total_jingzhi += parseFloat(yingkui_jingzhi);
                 }
 
+                var notice = isBlank(json_str.notice) ? '' : parseInt(json_str.notice);
+                var notice_icon = '';
+                switch(notice){
+                    case 2:
+                        notice_icon = 'am-icon-pause';
+                        break;
+                    case 4:
+                        notice_icon = 'am-icon-line-chart';
+                        break;
+                    case 6:
+                        notice_icon = 'am-icon-sort-amount-desc';
+                        break;
+                    default:
+                        notice_icon = '';
+                }
+
 
 				var append_str = '' +
 					'<tr class="fund_list '+json_str.code+' '+light+' ">' +
-						'<td class="am-text-middle am-show-lg-only">'+json_str.name+'</td>' +
-						'<td class="am-text-middle" title="'+json_str.name+'">'+json_str.code+'</td>' +
+						'<td class="am-text-middle am-show-lg-only">' +
+                    '<label class="am-checkbox-inline"><input name="notice[]" type="checkbox" value="'+json_str.code+'"> '+json_str.name+' <i class="'+notice_icon+'"></i> </label>' +
+
+                    '</td>' +
+						'<td class="am-text-middle view-fund" title="'+json_str.name+'">'+json_str.code+'</td>' +
 						'<td class="am-text-middle"><input type="text" class="am-text-center input-size" value="'+json_str.buy+'"  placeholder-text="购入价格"  name="buy" /></td>' +
 						'<td class="am-text-middle">' +
-							'<input type="text" class="am-text-center input-size" value="'+json_str.adding+'"  placeholder-text="补仓价格提醒" name="adding" />' +
+                    '<input type="text" class="am-text-center input-size" value="'+json_str.adding+'"  placeholder-text="补仓价格提醒" name="adding" />' +
 						'</td>' +
 						'<td class="am-text-middle">' +
 							'<input type="text" class="am-text-center input-size" value="'+json_str.sell+'"  placeholder-text="卖出价格提醒" name="sell" />' +
@@ -139,6 +158,45 @@ $(function() {
         }, 2500)
     })
 
+    /**
+     * 更改通知设置
+     */
+    $('.update-notice').on('click', function(){
+        var check_update = false;
+
+        var notice_type = $('select[name=notice_type]').val();
+        if(notice_type == ''){
+            alert('请选择要更改通知的设置类型');
+            return false;
+        }
+        $("input[name='notice[]']:checked").each(function (){
+            var code = $(this).val();
+            var fund = JSON.parse(localStorage.getItem(code));
+            if(fund){
+                fund['notice'] = notice_type
+                localStorage.setItem(code, JSON.stringify(fund));
+                check_update = true;
+            }
+            console.log(fund)
+        });
+
+        if(check_update){
+            var d = dialog({
+                title : 'Tips',
+                content : '更改设置完成!'
+            })
+            d.showModal();
+            setTimeout(function () {
+                d.close().remove();
+                $('.checkbox-all').removeAttr("checked")
+                _list();
+            }, 1500)
+
+        }
+
+        //
+    })
+
 	//删除基金
 	$('body').on('click', '.am-btn-danger', function(){
         var id = $(this).attr('data');
@@ -148,6 +206,14 @@ $(function() {
 		}
 
 	})
+
+    /**
+     * 点击跳转对应的天天基金的详细页
+     */
+    $('body').on('click', '.view-fund', function(){
+        var code = $(this).html();
+        chrome.tabs.create({url: 'http://fund.eastmoney.com/'+code+'.html'});
+    })
 
     //帮助文档
     $('.document').on('click', function(){
@@ -203,6 +269,17 @@ $(function() {
     $('.bak').on('click', function(){
         chrome.tabs.create({url: 'bak.html'});
 	})
+
+    /**
+     * 全选OR取消全选
+     */
+    $('.checkbox-all').on('click', function(){
+        if($(this).prop('checked')){
+            $("input[name='notice[]']").attr("checked", "checked")
+        }else{
+            $("input[name='notice[]']").removeAttr("checked")
+        }
+    })
 
 	_list();
 

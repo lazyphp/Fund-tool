@@ -15,7 +15,7 @@
 			min-width: 65rem;
 			min-height: 400px;
 		}
-		.am-link-cursor{
+		.am-link-cursor, .view-fund{
 			cursor: pointer;
 		}
 		.zan-img{
@@ -56,9 +56,32 @@
 		</div>
 	</div>
 	<hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
+
+	<div class="am-show-lg-only am-margin-bottom">
+		<select name="notice_type">
+			<option value="">请选择通知设置</option>
+			<option value="1">开启所有通知</option>
+			<option value="2">暂停所有通知</option>
+			<option value="4" class="am-text-danger">暂停卖出通知</option>
+			<option value="6" class="am-text-success">暂停补仓通知</option>
+		</select>
+		<span class="am-btn am-btn-xs am-btn-success update-notice"><i class="am-icon-cog"></i> 更改设置</span>
+		<span class="am-link-muted am-text-xs am-margin-left-sm">
+			下列图标表示对应的通知已被暂停：
+			<i class="am-icon-pause"></i> 暂停所有通知
+			<i class="am-icon-line-chart"></i> 暂停卖出通知
+			<i class="am-icon-sort-amount-desc"></i> 暂停补仓通知
+		</span>
+	</div>
+
 	<table class="am-table am-table-bordered am-table-striped am-table-hover am-text-sm am-text-center">
 		<tr>
-			<th class="am-text-center am-show-lg-only">基金名称</th>
+			<th class="am-text-center am-show-lg-only">
+				<label class="am-checkbox-inline">
+					<input type="checkbox" class="checkbox-all">
+					<strong>基金名称</strong>
+				</label>
+			</th>
 			<th class="am-text-center">基金代码</th>
 			<th class="am-text-center">成本价</th>
 			<th class="am-text-center">补仓价格提醒</th>
