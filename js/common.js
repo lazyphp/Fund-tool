@@ -1,4 +1,12 @@
+var API_URL = 'https://fund.pescms.com';
+
+/**
+ * 验证是否为数字
+ * @param n
+ * @returns {boolean}
+ */
 function isNumeric(n) {
+
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
@@ -21,12 +29,69 @@ function isBlank(str) {
 }
 
 /**
+ * 封装简易的AJAX请求函数
+ * @param param
+ * @param callback
+ */
+var $ajax = function(param, callback){
+    var obj = {url: '', data: {'': ''}, type: 'POST', dataType: 'JSON', dialog: true};
+    $.extend(obj, param);
+    var d = dialog({title: '系统提示', zIndex: '9999999'});
+
+
+    var data = new FormData();
+    for(var i in obj.data){
+        data.append(i, obj.data[i]);
+    }
+    var xhr = new XMLHttpRequest();
+    xhr.open(obj.type, obj.url);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+            switch (xhr.status){
+                case 200:
+                    if(obj.dataType == 'JSON'){
+                        var data = JSON.parse(xhr.responseText);
+
+                        if (obj.dialog == true) {
+                            d.content(data.msg).showModal();
+                            setTimeout(function () {
+                                d.close();
+                            }, 3000);
+                        }
+                    }else{
+                        var data = xhr.responseText;
+                    }
+                    callback(data, d);
+                    break;
+                case 404:
+                case 500:
+                    try{
+                        var data = JSON.parse(xhr.responseText);
+                        var msg = data.msg;
+                    }catch (e){
+                        var msg = '系统请求出错,请刷新页面再试';
+                    }
+                    d.content(msg).showModal();
+                    setTimeout(function () {
+                        d.close();
+                    }, 3000);
+                    break;
+            }
+        }
+    }
+    xhr.setRequestHeader("x-requested-with", 'XMLHttpRequest');
+    xhr.setRequestHeader("accept", 'application/json');
+    xhr.send(data);
+
+
+}
+
+/**
  * 弹窗提醒
  * @param msg 提示信息
  * @private
  */
 var _alert = function (msg) {
-    console.log(msg)
     var d = dialog({
         title : 'Tips',
         content : msg,
@@ -136,4 +201,40 @@ var refreshJingzhi = function (user) {
 
         }
     }
+}
+
+/**
+ * 云备份
+ * @param user 用户操作备份
+ * @returns {boolean}
+ */
+var cloudBackUp = function (user) {
+    var apikey = localStorage.getItem('apikey');
+    if(isBlank(apikey)){
+        return true;
+    }
+
+    var bak = {};
+
+    for(var i in localStorage) {
+        if (isNumeric(i)) {
+            var content = localStorage.getItem(i);
+            if (content != '') {
+                bak[i] = JSON.parse( content );
+            }
+        }
+    }
+
+    var param = {
+        url : API_URL+'/Api/Backup/append/'+Math.random(),
+        data : {
+            apikey : apikey,
+            backup : JSON.stringify(bak)
+        },
+        dialog : user
+    };
+
+    $ajax(param, function (data) {
+    })
+
 }

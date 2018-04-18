@@ -1,4 +1,10 @@
 
+// 监听来自content-script的消息
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
+{
+    chrome.tabs.create({url: 'popup.html'});
+    console.log(request, sender, sendResponse);
+});
 
 /**
  * 消息提醒
@@ -7,6 +13,12 @@ var notifications = function(){
     var saveNotice = {}
     var date = moment().format('YYYY-MM-DD');
     var time = moment().format('H:mm').split(':');
+
+    //非工作日不提醒 PS:法定假期无法判定呀。这个需要人工介入，就不管理了
+    if(moment().format('d') == 0 || moment().format('d') == 6){
+        return false;
+    }
+
     if(parseInt(time[0]) != 14 || parseInt(time[1]) < 30 ){
         return false;
     }

@@ -10,6 +10,24 @@
     <script type="text/javascript" src="js/moment.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/bak.js"></script>
+    <style>
+        .list-btn{
+            padding: .25em .625em;
+            min-width: 10px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1;
+            vertical-align: baseline;
+            white-space: nowrap;
+            text-align: center;
+            border-radius: 0;
+        }
+
+        .am-u-sm-2:not(:nth-child(3)){
+            text-align: center;
+            border-right: 1px solid #c7c7c7;
+        }
+    </style>
 </head>
 <body>
 <div class="am-padding">
@@ -20,16 +38,48 @@
     </div>
     <hr class="am-divider am-divider-dashed">
 
-    <div class="am-margin-bottom">
-        <textarea class="am-form-field am-margin-bottom restore-content" rows="9" placeholder="将您备份好的代码，粘贴到此处，点击还原数据按钮，进行数据还原"></textarea>
-        <button type="submit" class="am-btn am-btn-primary restore">还原数据</button>
+    <div class="am-panel am-panel-default">
+        <div class="am-panel-hd">云备份设置</div>
+        <div class="am-panel-bd am-text-sm">
+            <div class="am-margin-bottom">
+                <div class="am-margin-bottom">
+                    <p><strong>接口API:</strong></p>
+                    <p><input type="text" class="am-form-field am-input-sm apikey" placeholder="" /></p>
+                    <button type="button" class="am-btn am-btn-danger am-btn-xs record-api">保存</button>
+                    <button type="button" class="am-btn am-btn-xs signup">申请接口</button>
+                </div>
+
+                <div class="am-backup-hide" style="display: none">
+                    <hr class="am-divider am-divider-dashed">
+                    <p class="am-margin-0"><strong>备份列表:</strong></p>
+                    <ul class="am-list am-margin-top-sm am-list-static am-list-border backup-list am-scrollable-vertical">
+                        <li>
+                            读取备份数据中...
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
     </div>
 
-    <div>
-        将如下代码复制并保存于文本
-        <pre class="am-pre-scrollable">
-        </pre>
+    <div class="am-panel am-panel-default">
+        <div class="am-panel-hd">手动备份与还原</div>
+        <div class="am-panel-bd am-text-sm">
+            <div class="am-margin-bottom">
+                <textarea class="am-form-field am-margin-bottom restore-content" rows="9" placeholder="将您备份好的代码，粘贴到此处，点击还原数据按钮，进行数据还原"></textarea>
+                <button type="submit" class="am-btn am-btn-primary restore am-btn-sm">还原数据</button>
+            </div>
+
+            <div>
+                将如下代码复制并保存于文本
+                <pre class="am-pre-scrollable">
+                </pre>
+            </div>
+        </div>
     </div>
+
+
 </div>
 </body>
 </html>
