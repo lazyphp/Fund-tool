@@ -11,7 +11,7 @@ GITHUB源码：[https://github.com/lazyphp/Fund-tool](https://github.com/lazyphp
 
 网盘下载：[https://pan.baidu.com/s/1Z0zwbC4sdgm36KtFQQ31xg](https://pan.baidu.com/s/1Z0zwbC4sdgm36KtFQQ31xg) 
 
-若您会科学的方式访问到谷歌网上应用店，那么我们强烈推荐您通过官方的渠道进行安装。若您无法通过官方渠道安装，那么烦请您到网盘下载Fund-tool.crx文件，并存放至硬盘任意路径。具体流程如下：  
+若您会科学的方式访问到谷歌网上应用店，那么我们强烈推荐您通过官方的渠道进行安装。若您无法通过官方渠道安装，在本源码根目录下，将Fund-tool.crx拖动至浏览器扩展页即可安装，并存放至硬盘任意路径。具体流程如下：  
   
   
 -   1.打开下载Fund-tool.crx所在的目录。  
